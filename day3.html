@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naval Mission Academy - Day 3: Navigation Fundamentals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 40px;
+        }
+        .lesson-section {
+            margin-bottom: 40px;
+        }
+        .lesson-section h2 {
+            color: #1e3c72;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .lesson-section h3 {
+            color: #2a5298;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .lesson-section p {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .lesson-section ul, .lesson-section ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        .lesson-section li {
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.6;
+        }
+        .code-block {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2a5298;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .quiz-section {
+            background: #f0f4f8;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .quiz-section h3 {
+            color: #1e3c72;
+            margin-top: 0;
+        }
+        .quiz-question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 4px;
+            border-left: 4px solid #667eea;
+        }
+        .quiz-question input[type="radio"],
+        .quiz-question input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        .quiz-option {
+            margin: 8px 0;
+            padding: 8px;
+        }
+        footer {
+            background: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+        }
+        .nav-button {
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .nav-button:hover {
+            background: #5568d3;
+        }
+        .nav-button.disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚓ Naval Mission Academy</h1>
+            <p>Day 3: Navigation Fundamentals</p>
+        </header>
+
+        <div class="content">
+            <div class="lesson-section">
+                <h2>Introduction to Naval Navigation</h2>
+                <p>Navigation is the art and science of determining a vessel's position and planning a safe course of travel from one point to another. On Day 3, we'll explore the fundamental principles that naval officers use to navigate the world's oceans.</p>
+                <p>Whether using ancient stars or modern GPS, navigation remains the backbone of maritime operations and naval warfare strategy.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Key Navigation Concepts</h2>
+                
+                <h3>1. Latitude and Longitude</h3>
+                <p>The Earth is divided into a grid system of imaginary lines that help us locate any point on the globe:</p>
+                <ul>
+                    <li><strong>Latitude:</strong> Lines running east-west, measuring distance from the equator (0° to 90° North/South)</li>
+                    <li><strong>Longitude:</strong> Lines running north-south, measuring distance from the Prime Meridian (0° to 180° East/West)</li>
+                    <li><strong>Coordinates:</strong> Any location can be precisely identified using latitude and longitude degrees, minutes, and seconds</li>
+                </ul>
+                <div class="info-box">
+                    <strong>Example Coordinate:</strong> 40°42'51.3"N 74°00'21.8"W is the location of the Statue of Liberty in New York Harbor
+                </div>
+
+                <h3>2. Compass Bearings and Directions</h3>
+                <p>Understanding directional references is essential for navigation:</p>
+                <ul>
+                    <li><strong>Cardinal Directions:</strong> North (0°/360°), East (90°), South (180°), West (270°)</li>
+                    <li><strong>Intercardinal Directions:</strong> Northeast (45°), Southeast (135°), Southwest (225°), Northwest (315°)</li>
+                    <li><strong>True North vs Magnetic North:</strong> True North is the geographic pole; Magnetic North is where compass needles point</li>
+                    <li><strong>Magnetic Declination:</strong> The angle between True North and Magnetic North, which varies by location and time</li>
+                </ul>
+
+                <h3>3. Charts and Maps</h3>
+                <p>Naval charts are specialized maps designed for maritime use:</p>
+                <ul>
+                    <li><strong>Nautical Charts:</strong> Show water depths, sea bottom features, hazards, and navigational aids</li>
+                    <li><strong>Chart Symbols:</strong> Standardized symbols indicate reefs, wrecks, buoys, lighthouses, and other important features</li>
+                    <li><strong>Scale:</strong> Charts are available in various scales for different navigational purposes (coastal, harbor, approach)</li>
+                    <li><strong>Updates:</strong> Charts must be regularly updated with the latest corrections and information</li>
+                </ul>
+
+                <h3>4. Course and Heading</h3>
+                <p>It's important to understand the distinction between these related concepts:</p>
+                <ul>
+                    <li><strong>Course:</strong> The intended path of the vessel over the ground</li>
+                    <li><strong>Heading:</strong> The direction the vessel is actually pointing</li>
+                    <li><strong>Track:</strong> The actual path followed by the vessel (may differ from course due to currents)</li>
+                    <li><strong>Set and Drift:</strong> Water currents affect the vessel's actual movement relative to its heading</li>
+                </ul>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Navigation Techniques</h2>
+                
+                <h3>Dead Reckoning</h3>
+                <p>One of the oldest navigation methods, dead reckoning (deduced reckoning) involves calculating current position based on:</p>
+                <ul>
+                    <li>Last known position</li>
+                    <li>Course steered</li>
+                    <li>Speed of the vessel</li>
+                    <li>Time elapsed</li>
+                </ul>
+                <p><strong>Advantages:</strong> Works without external references; reliable as a backup</p>
+                <p><strong>Disadvantages:</strong> Errors accumulate over time; doesn't account for currents and drift</p>
+
+                <h3>Celestial Navigation</h3>
+                <p>Using stars, planets, sun, and moon to determine position:</p>
+                <ul>
+                    <li>Takes sights of celestial bodies using a sextant</li>
+                    <li>Records precise time and measured angles</li>
+                    <li>Calculates latitude and longitude using astronomical tables</li>
+                    <li>Still taught and used as a backup to electronic systems</li>
+                </ul>
+
+                <h3>Electronic Navigation</h3>
+                <p>Modern vessels rely on electronic systems for precise navigation:</p>
+                <ul>
+                    <li><strong>GPS (Global Positioning System):</strong> Provides accurate position, speed, and time</li>
+                    <li><strong>Radar:</strong> Detects objects and landmasses; essential in poor visibility</li>
+                    <li><strong>Electronic Chart Display (ECDIS):</strong> Digital charts with real-time position overlay</li>
+                    <li><strong>Autopilot:</strong> Maintains course automatically, reducing crew fatigue</li>
+                </ul>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Navigational Hazards and Safety</h2>
+                <p>Navigators must constantly be aware of potential dangers:</p>
+                <ul>
+                    <li><strong>Shallow Water:</strong> Risk of running aground; requires careful monitoring of depth</li>
+                    <li><strong>Reefs and Underwater Hazards:</strong> Marked on charts; visible on radar and sonar</li>
+                    <li><strong>Traffic Separation Schemes:</strong> Designated shipping lanes reduce collision risk</li>
+                    <li><strong>Weather Systems:</strong> Storm systems can affect course and safety</li>
+                    <li><strong>Other Vessels:</strong> Requires constant lookout and understanding of collision avoidance rules</li>
+                </ul>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Practical Calculation Example</h2>
+                <div class="code-block">
+Dead Reckoning Problem:
+- Vessel last position: 40°N, 75°W
+- Course: 090° (due East)
+- Speed: 15 knots
+- Time traveled: 4 hours
+
+Solution:
+- Distance = Speed × Time = 15 knots × 4 hours = 60 nautical miles
+- Traveling due East means latitude stays at 40°N
+- Longitude change = 60 nm ÷ cos(40°) ≈ 78 minutes ≈ 1°18'
+- New position: 40°N, 73°42'W
+                </div>
+            </div>
+
+            <div class="quiz-section">
+                <h3>📝 Day 3 Knowledge Check</h3>
+                <div class="quiz-question">
+                    <p><strong>Question 1:</strong> What is the difference between Course and Heading?</p>
+                    <div class="quiz-option">
+                        <label>
+                            <input type="radio" name="q1">
+                            Course is the intended path over ground; Heading is the direction the vessel points
+                        </label>
+                    </div>
+                    <div class="quiz-option">
+                        <label>
+                            <input type="radio" name="q1">
+                            They are identical terms
+                        </label>
+                    </div>
+                    <div class="quiz-option">
+                        <label>
+                            <input type="radio" name="q1">
+                            Course is compass direction; Heading is magnetic direction
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>Question 2:</strong> What are the coordinates for the Prime Meridian?</p>
+                    <div class="quiz-option">
+                        <label>
+                            <input type="radio" name="q2">
+                            0° Longitude
+                        </label>
+                    </div>
+                    <div class="quiz-option">
+                        <label>
+                            <input type="radio" name="q2">
+                            180° Longitude
+                        </label>
+                    </div>
+                    <div class="quiz-option">
+                        <label>
+                            <input type="radio" name="q2">
+                            0° Latitude
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>Question 3:</strong> Which navigation method is considered the oldest?</p>
+                    <div class="quiz-option">
+                        <label>
+                            <input type="radio" name="q3">
+                            GPS Navigation
+                        </label>
+                    </div>
+                    <div class="quiz-option">
+                        <label>
+                            <input type="radio" name="q3">
+                            Dead Reckoning
+                        </label>
+                    </div>
+                    <div class="quiz-option">
+                        <label>
+                            <input type="radio" name="q3">
+                            Electronic Navigation
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p><strong>Question 4:</strong> What is magnetic declination?</p>
+                    <div class="quiz-option">
+                        <label>
+                            <input type="radio" name="q4">
+                            The angle between True North and Magnetic North
+                        </label>
+                    </div>
+                    <div class="quiz-option">
+                        <label>
+                            <input type="radio" name="q4">
+                            The latitude line at the equator
+                        </label>
+                    </div>
+                    <div class="quiz-option">
+                        <label>
+                            <input type="radio" name="q4">
+                            A type of compass error in the southern hemisphere
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <a href="day2.html" class="nav-button">← Day 2: Seamanship Basics</a>
+                <a href="day4.html" class="nav-button">Day 4: Tactical Operations →</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Naval Mission Academy. All rights reserved. | Advanced Navigation Training Program</p>
+        </footer>
+    </div>
+</body>
+</html>
