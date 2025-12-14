@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Naval Mission Academy - Professional English Course for Maritime Professionals">
+    <meta name="keywords" content="Naval Academy, English Course, Maritime Education, Professional Development">
+    <title>Naval Mission Academy - English Course</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .logo-section p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #ff9800;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .cta-button:hover {
+            background-color: #f57c00;
+        }
+
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .section {
+            margin: 3rem 0;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h3 {
+            color: #1a3a52;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #ff9800;
+            padding-bottom: 0.5rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #ff9800;
+            text-align: center;
+        }
+
+        .feature-card h4 {
+            color: #1a3a52;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .course-modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .module-card {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            padding: 2rem;
+            border-radius: 8px;
+            border-top: 4px solid #1a3a52;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .module-card h4 {
+            color: #1a3a52;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .module-card ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .module-card li {
+            padding: 0.5rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .module-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ff9800;
+            font-weight: bold;
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff9800;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background-color: #1a3a52;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        .footer-links {
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: #ff9800;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fbb040;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .logo-section h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1>⚓ Naval Mission Academy</h1>
+                    <p>Professional English Training for Maritime Excellence</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Master English for Naval Excellence</h2>
+            <p>Comprehensive English course designed specifically for naval professionals and maritime students</p>
+            <a href="#courses" class="cta-button">Explore Courses</a>
+            <a href="#contact" class="cta-button">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- About Section -->
+            <section class="section">
+                <h3>About Naval Mission Academy</h3>
+                <p>Naval Mission Academy is dedicated to providing high-quality English language education tailored to the unique needs of maritime professionals. Our curriculum combines professional communication skills with naval-specific terminology and protocols.</p>
+                <p style="margin-top: 1rem;">Whether you're a naval officer, maritime student, or aspiring seafarer, our comprehensive English courses will equip you with the language skills necessary for success in the maritime industry.</p>
+            </section>
+
+            <!-- Key Features -->
+            <section class="section">
+                <h3>Why Choose Naval Mission Academy?</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>📚 Expert Instructors</h4>
+                        <p>Learn from experienced naval officers and English language specialists with extensive maritime knowledge.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎯 Specialized Curriculum</h4>
+                        <p>Courses specifically designed for naval communications, protocols, and professional maritime English.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🌍 Global Standards</h4>
+                        <p>Aligned with international maritime English standards and IMO (International Maritime Organization) requirements.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>💻 Interactive Learning</h4>
+                        <p>Access engaging multimedia resources, interactive simulations, and real-world scenario training.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>✅ Certification</h4>
+                        <p>Earn recognized certifications upon course completion to advance your maritime career.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🤝 Community Support</h4>
+                        <p>Join a community of maritime professionals and receive ongoing support throughout your learning journey.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Course Modules -->
+            <section class="section" id="courses">
+                <h3>Our Course Modules</h3>
+                <div class="course-modules">
+                    <div class="module-card">
+                        <h4>Fundamentals</h4>
+                        <p>Build a strong foundation in English language basics essential for maritime communication.</p>
+                        <ul>
+                            <li>Basic Grammar</li>
+                            <li>Essential Vocabulary</li>
+                            <li>Maritime Terminology</li>
+                            <li>Communication Basics</li>
+                        </ul>
+                    </div>
+                    <div class="module-card">
+                        <h4>Maritime Communications</h4>
+                        <p>Master specialized communication protocols used in naval and maritime operations.</p>
+                        <ul>
+                            <li>Radio Communications</li>
+                            <li>Standard Phrases (SMCP)</li>
+                            <li>Navigation Instructions</li>
+                            <li>Emergency Procedures</li>
+                        </ul>
+                    </div>
+                    <div class="module-card">
+                        <h4>Professional Development</h4>
+                        <p>Advance your career with professional and technical English skills.</p>
+                        <ul>
+                            <li>Technical Writing</li>
+                            <li>Report Preparation</li>
+                            <li>Leadership Communication</li>
+                            <li>Career Advancement</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics -->
+            <section class="section">
+                <h3>Our Impact</h3>
+                <div class="stats-section">
+                    <div class="stat-box">
+                        <div class="stat-number">5000+</div>
+                        <div class="stat-label">Students Trained</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Maritime Partners</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Learning Access</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="section" id="contact" style="text-align: center; background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%); color: white;">
+                <h3 style="color: white; border-bottom-color: #ff9800;">Ready to Begin Your Journey?</h3>
+                <p style="font-size: 1.1rem; margin: 1rem 0;">Join Naval Mission Academy and master English for maritime success.</p>
+                <a href="#" class="cta-button" style="background-color: #ff9800; color: white;">Enroll Now</a>
+                <a href="#" class="cta-button" style="background-color: transparent; border: 2px solid white;">Learn More</a>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Naval Mission Academy. All rights reserved.</p>
+            <p>Empowering Maritime Professionals Through Language Excellence</p>
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#courses">Courses</a>
+                <a href="#contact">Contact</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
