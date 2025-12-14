@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 1 - Naval Mission Academy English Course</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #1e3c72;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #2a5298;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Timeline Game */
+        .timeline-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ddd;
+            z-index: 1;
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+            cursor: move;
+            padding: 20px 10px;
+            background: white;
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background: #e8eef7;
+            border-color: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .timeline-item.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .timeline-item.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .timeline-item-number {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .timeline-item-text {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .timeline-instructions {
+            background: #e8eef7;
+            padding: 10px 15px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .check-timeline-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .check-timeline-btn:hover {
+            background: #764ba2;
+        }
+
+        /* Before-After Slider */
+        .comparison-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .comparison-before,
+        .comparison-after {
+            width: 100%;
+            height: 100%;
+        }
+
+        .comparison-before {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .comparison-slider {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: white;
+            cursor: ew-resize;
+            transform: translateX(-50%);
+        }
+
+        .comparison-slider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .before-label,
+        .after-label {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 8px 12px;
+            font-size: 0.9em;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .before-label {
+            top: 10px;
+            left: 10px;
+        }
+
+        .after-label {
+            top: 10px;
+            right: 10px;
+        }
+
+        /* Vocabulary Section */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .vocab-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .vocab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .vocab-card.flipped {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .vocab-word {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .vocab-definition {
+            font-size: 0.95em;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .vocab-pronunciation {
+            font-size: 0.85em;
+            margin-top: 10px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        /* Grammar Section */
+        .grammar-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .grammar-box.example {
+            background: #f9f9f9;
+            border-left-color: #28a745;
+        }
+
+        .grammar-rule {
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .example-text {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+            font-style: italic;
+            color: #555;
+        }
+
+        .correct-example {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .incorrect-example {
+            color: #dc3545;
+            text-decoration: line-through;
+        }
+
+        /* Homework Section */
+        .homework-section {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .homework-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .homework-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .homework-item::before {
+            content: '✓';
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background: #ffc107;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        .homework-item input[type="checkbox"] {
+            margin-right: 15px;
+            margin-top: 3px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .homework-item input[type="checkbox"]:checked + span {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .homework-checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        /* Dialog/Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: #000;
+        }
+
+        .modal-title {
+            color: #1e3c72;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .modal-text {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Progress Indicator */
+        .progress-bar {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .vocab-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                flex-direction: column;
+            }
+
+            .timeline::before {
+                top: auto;
+                left: 20px;
+                right: auto;
+                width: 2px;
+                height: 100%;
+            }
+
+            .timeline-item {
+                margin: 10px 0;
+            }
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+        }
+
+        .btn.secondary {
+            background: #6c757d;
+        }
+
+        .btn.secondary:hover {
+            background: #5a6268;
+        }
+
+        .feedback {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .feedback.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .feedback.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚓ Naval Mission Academy</h1>
+            <p>English Course - Day 1: Introduction to Maritime Communication</p>
+        </header>
+
+        <div class="content">
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
+            </div>
+
+            <!-- Interactive Timeline Game -->
+            <section class="section">
+                <h2>🎮 Interactive Timeline Game</h2>
+                <p>Arrange the historical maritime events in the correct chronological order by dragging and dropping them into place. Then click "Check Order" to verify your answer.</p>
+                
+                <div class="timeline-container">
+                    <div class="timeline-instructions">
+                        <strong>Instructions:</strong> Drag the events below to arrange them in chronological order from earliest to latest.
+                    </div>
+
+                    <div id="timelineGame" class="timeline">
+                        <div class="timeline-item" draggable="true" data-year="1492">
+                            <div class="timeline-item-number">1492</div>
+                            <div class="timeline-item-text">Columbus Crosses the Atlantic</div>
+                        </div>
+                        <div class="timeline-item" draggable="true" data-year="1588">
+                            <div class="timeline-item-number">1588</div>
+                            <div class="timeline-item-text">Spanish Armada Defeated</div>
+                        </div>
+                        <div class="timeline-item" draggable="true" data-year="1912">
+                            <div class="timeline-item-number">1912</div>
+                            <div class="timeline-item-text">Titanic Sinks</div>
+                        </div>
+                        <div class="timeline-item" draggable="true" data-year="1943">
+                            <div class="timeline-item-number">1943</div>
+                            <div class="timeline-item-text">USS Missouri Launched</div>
+                        </div>
+                    </div>
+
+                    <button class="check-timeline-btn" onclick="checkTimeline()">Check Order</button>
+                    <div id="timelineResult" class="feedback"></div>
+                </div>
+            </section>
+
+            <!-- Before-After Slider Section -->
+            <section class="section">
+                <h2>📊 Before & After: Maritime Communication Evolution</h2>
+                <p>Drag the slider to see how maritime communication has evolved over time.</p>
+
+                <div class="comparison-container" id="comparisonContainer">
+                    <div class="comparison-before">
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 100%; height: 300px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; font-weight: bold; text-align: center; padding: 20px;">
+                            1800s: Signal Flags<br><span style="font-size: 0.6em;">Morse Code & Flags</span>
+                        </div>
+                    </div>
+                    <div class="comparison-after" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                        <div style="background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%); width: 100%; height: 300px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; font-weight: bold; text-align: center; padding: 20px;">
+                            2024: Digital Systems<br><span style="font-size: 0.6em;">Radar, GPS & Internet</span>
+                        </div>
+                    </div>
+                    <div class="comparison-slider" id="comparisonSlider"></div>
+                    <div class="before-label">BEFORE</div>
+                    <div class="after-label">AFTER</div>
+                </div>
+            </section>
+
+            <!-- Vocabulary Section -->
+            <section class="section">
+                <h2>📚 Vocabulary: Maritime Terms</h2>
+                <p>Click on each card to reveal the definition. Hover for pronunciation.</p>
+
+                <div class="vocab-grid">
+                    <div class="vocab-card" onclick="flipCard(this)">
+                        <div class="vocab-word">Starboard</div>
+                        <div class="vocab-definition">Right side of a ship when facing forward</div>
+                        <div class="vocab-pronunciation">/ˈstɑːrbɚd/</div>
+                    </div>
+
+                    <div class="vocab-card" onclick="flipCard(this)">
+                        <div class="vocab-word">Port</div>
+                        <div class="vocab-definition">Left side of a ship when facing forward</div>
+                        <div class="vocab-pronunciation">/pɔːrt/</div>
+                    </div>
+
+                    <div class="vocab-card" onclick="flipCard(this)">
+                        <div class="vocab-word">Bow</div>
+                        <div class="vocab-definition">Front section of a ship</div>
+                        <div class="vocab-pronunciation">/baʊ/</div>
+                    </div>
+
+                    <div class="vocab-card" onclick="flipCard(this)">
+                        <div class="vocab-word">Stern</div>
+                        <div class="vocab-definition">Rear section of a ship</div>
+                        <div class="vocab-pronunciation">/stɝːn/</div>
+                    </div>
+
+                    <div class="vocab-card" onclick="flipCard(this)">
+                        <div class="vocab-word">Ballast</div>
+                        <div class="vocab-definition">Weight material in a ship's hold for stability</div>
+                        <div class="vocab-pronunciation">/ˈbæləst/</div>
+                    </div>
+
+                    <div class="vocab-card" onclick="flipCard(this)">
+                        <div class="vocab-word">Deck</div>
+                        <div class="vocab-definition">Horizontal surface inside or outside a ship</div>
+                        <div class="vocab-pronunciation">/dek/</div>
+                    </div>
+
+                    <div class="vocab-card" onclick="flipCard(this)">
+                        <div class="vocab-word">Ahoy</div>
+                        <div class="vocab-definition">Traditional nautical greeting or call for attention</div>
+                        <div class="vocab-pronunciation">/əˈhɔɪ/</div>
+                    </div>
+
+                    <div class="vocab-card" onclick="flipCard(this)">
+                        <div class="vocab-word">Mainsail</div>
+                        <div class="vocab-definition">Primary sail on a ship's mast</div>
+                        <div class="vocab-pronunciation">/ˈmeɪnseɪl/</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grammar Section -->
+            <section class="section">
+                <h2>📖 Grammar: Maritime Command Language</h2>
+                
+                <div class="grammar-box">
+                    <div class="grammar-rule">Rule 1: Imperative Sentences for Commands</div>
+                    <p>In maritime communication, imperative sentences (commands) are essential. They start with the verb and don't use a subject.</p>
+                    <div class="example-text">
+                        <span class="correct-example">✓ "Secure the deck!"</span><br>
+                        <span class="incorrect-example">✗ "You should secure the deck."</span>
+                    </div>
+                </div>
+
+                <div class="grammar-box">
+                    <div class="grammar-rule">Rule 2: Present Tense for Instructions</div>
+                    <p>Use simple present tense when giving instructions or describing procedures on a ship.</p>
+                    <div class="example-text">
+                        <span class="correct-example">✓ "The crew raises the sails at dawn."</span><br>
+                        <span class="incorrect-example">✗ "The crew has been raising the sails at dawn."</span>
+                    </div>
+                </div>
+
+                <div class="grammar-box">
+                    <div class="grammar-rule">Rule 3: Passive Voice in Reports</div>
+                    <p>Maritime reports often use passive voice to focus on the action rather than the actor.</p>
+                    <div class="example-text">
+                        <span class="correct-example">✓ "The cargo was loaded at 0800 hours."</span><br>
+                        <span class="incorrect-example">✗ "They loaded the cargo at 0800 hours." (less formal)</span>
+                    </div>
+                </div>
+
+                <div class="grammar-box">
+                    <div class="grammar-rule">Rule 4: Conditional Sentences for Procedures</div>
+                    <p>Use conditional sentences to explain procedures and what happens if certain conditions are met.</p>
+                    <div class="example-text">
+                        <span class="correct-example">✓ "If the weather worsens, lower the sails immediately."</span><br>
+                        <span class="incorrect-example">✗ "When weather worsens, lower the sails immediately."</span>
+                    </div>
+                </div>
+
+                <div class="grammar-box">
+                    <div class="grammar-rule">Rule 5: Phrasal Verbs in Maritime Context</div>
+                    <p>Many phrasal verbs are used in maritime communication and should be learned in context.</p>
+                    <div class="example-text">
+                        <span class="correct-example">✓ "Set out to sea" - Begin a voyage</span><br>
+                        <span class="correct-example">✓ "Pull in to port" - Arrive at harbor</span><br>
+                        <span class="correct-example">✓ "Cast off" - Leave from dock</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Homework Section -->
+            <section class="homework-section">
+                <h2>📝 Homework Assignment</h2>
+                <p>Complete the following tasks to reinforce today's learning:</p>
+
+                <ul class="homework-list">
+                    <li class="homework-item">
+                        <input type="checkbox" id="hw1">
+                        <span><strong>Memorize 5 Maritime Vocabulary Terms:</strong> Study at least 5 of the vocabulary cards presented today. Write each word with its definition 3 times in your notebook.</span>
+                    </li>
+
+                    <li class="homework-item">
+                        <input type="checkbox" id="hw2">
+                        <span><strong>Write 5 Imperative Sentences:</strong> Create 5 maritime commands using imperative sentences. Example: "Raise the flag!" Submit these sentences for review.</span>
+                    </li>
+
+                    <li class="homework-item">
+                        <input type="checkbox" id="hw3">
+                        <span><strong>Grammar Exercise:</strong> Complete the online grammar quiz covering imperative and conditional sentences. Aim for at least 80% accuracy. (Link: grammar-quiz-day1.html)</span>
+                    </li>
+
+                    <li class="homework-item">
+                        <input type="checkbox" id="hw4">
+                        <span><strong>Reading Comprehension:</strong> Read the article "Introduction to Maritime Communication" on pages 12-15 of your course manual. Write a 100-word summary.</span>
+                    </li>
+
+                    <li class="homework-item">
+                        <input type="checkbox" id="hw5">
+                        <span><strong>Listening Practice:</strong> Watch the video "Historical Maritime Events Timeline" (20 minutes) and take notes on key events and dates.</span>
+                    </li>
+
+                    <li class="homework-item">
+                        <input type="checkbox" id="hw6">
+                        <span><strong>Speaking Practice:</strong> Record yourself reading 3 maritime commands aloud. Focus on proper pronunciation and intonation. Submit the audio file to your instructor.</span>
+                    </li>
+
+                    <li class="homework-item">
+                        <input type="checkbox" id="hw7">
+                        <span><strong>Vocabulary Match Game:</strong> Complete the online vocabulary matching game covering today's maritime terms. Try to achieve 100% accuracy.</span>
+                    </li>
+
+                    <li class="homework-item">
+                        <input type="checkbox" id="hw8">
+                        <span><strong>Reflection Essay:</strong> Write a 150-word reflection on what you learned today and how maritime communication has evolved. What surprised you most?</span>
+                    </li>
+                </ul>
+
+                <div class="btn-group">
+                    <button class="btn" onclick="saveProgress()">Save Progress</button>
+                    <button class="btn secondary" onclick="showDeadline()">Show Deadline</button>
+                    <button class="btn" onclick="submitHomework()">Submit Homework</button>
+                </div>
+            </section>
+
+            <!-- Resources Section -->
+            <section class="section">
+                <h2>🔗 Additional Resources</h2>
+                <div class="grammar-box">
+                    <h3>Recommended Reading:</h3>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Chapter 1: Maritime Basics - Course Manual</li>
+                        <li>Maritime Dictionary - Comprehensive glossary</li>
+                        <li>Naval Communication Standards - Reference guide</li>
+                    </ul>
+                </div>
+
+                <div class="grammar-box" style="margin-top: 15px;">
+                    <h3>Video Resources:</h3>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>YouTube: "Maritime English for Professionals" - 45 min</li>
+                        <li>YouTube: "Ship Navigation Basics" - 30 min</li>
+                        <li>YouTube: "Historical Maritime Expeditions" - 60 min</li>
+                    </ul>
+                </div>
+
+                <div class="grammar-box" style="margin-top: 15px;">
+                    <h3>Practice Tools:</h3>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Duolingo Maritime English Course</li>
+                        <li>Interactive Maritime Simulator</li>
+                        <li>Vocabulary Flashcard App</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="deadlineModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('deadlineModal')">&times;</span>
+            <div class="modal-title">📅 Homework Deadline</div>
+            <div class="modal-text">
+                <strong>Due Date:</strong> Tomorrow (24 hours from now)<br>
+                <strong>Submission Time:</strong> 23:59 UTC<br>
+                <strong>Late Submission:</strong> Allowed with 10% penalty after deadline
+            </div>
+            <button class="btn" onclick="closeModal('deadlineModal')">Close</button>
+        </div>
+    </div>
+
+    <div id="submissionModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('submissionModal')">&times;</span>
+            <div class="modal-title">✅ Submission Confirmation</div>
+            <div class="modal-text" id="submissionMessage"></div>
+            <button class="btn" onclick="closeModal('submissionModal')">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Timeline Game Logic
+        let draggedElement = null;
+        const timelineItems = document.querySelectorAll('.timeline-item');
+
+        timelineItems.forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+                draggedElement = item;
+                item.style.opacity = '0.5';
+            });
+
+            item.addEventListener('dragend', (e) => {
+                item.style.opacity = '1';
+            });
+
+            item.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+
+            item.addEventListener('drop', (e) => {
+                e.preventDefault();
+                if (draggedElement !== item) {
+                    const timelineGame = document.getElementById('timelineGame');
+                    const allItems = [...timelineGame.querySelectorAll('.timeline-item')];
+                    const draggedIndex = allItems.indexOf(draggedElement);
+                    const targetIndex = allItems.indexOf(item);
+
+                    if (draggedIndex < targetIndex) {
+                        item.parentNode.insertBefore(draggedElement, item.nextSibling);
+                    } else {
+                        item.parentNode.insertBefore(draggedElement, item);
+                    }
+                }
+            });
+        });
+
+        function checkTimeline() {
+            const timelineGame = document.getElementById('timelineGame');
+            const items = timelineGame.querySelectorAll('.timeline-item');
+            const result = document.getElementById('timelineResult');
+            let isCorrect = true;
+            let previousYear = 0;
+
+            items.forEach((item, index) => {
+                const year = parseInt(item.dataset.year);
+                if (year < previousYear) {
+                    isCorrect = false;
+                    item.classList.add('incorrect');
+                    item.classList.remove('correct');
+                } else {
+                    item.classList.add('correct');
+                    item.classList.remove('incorrect');
+                    previousYear = year;
+                }
+            });
+
+            if (isCorrect) {
+                result.className = 'feedback success';
+                result.textContent = '🎉 Correct! You have arranged the events in the proper chronological order!';
+                updateProgress(25);
+            } else {
+                result.className = 'feedback error';
+                result.textContent = '❌ Not quite right. Check the order and try again. Remember, events should be arranged from earliest to latest.';
+            }
+        }
+
+        // Before-After Slider Logic
+        const comparisonContainer = document.getElementById('comparisonContainer');
+        const comparisonSlider = document.getElementById('comparisonSlider');
+        let isSliding = false;
+
+        comparisonContainer.addEventListener('mousedown', () => {
+            isSliding = true;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isSliding = false;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isSliding) return;
+
+            const rect = comparisonContainer.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+
+            const percentage = (x / rect.width) * 100;
+            comparisonSlider.style.left = percentage + '%';
+
+            const beforeDiv = comparisonContainer.querySelector('.comparison-before');
+            beforeDiv.style.width = percentage + '%';
+        });
+
+        // Touch support for mobile
+        comparisonContainer.addEventListener('touchstart', () => {
+            isSliding = true;
+        });
+
+        document.addEventListener('touchend', () => {
+            isSliding = false;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isSliding) return;
+
+            const rect = comparisonContainer.getBoundingClientRect();
+            let x = e.touches[0].clientX - rect.left;
+
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+
+            const percentage = (x / rect.width) * 100;
+            comparisonSlider.style.left = percentage + '%';
+
+            const beforeDiv = comparisonContainer.querySelector('.comparison-before');
+            beforeDiv.style.width = percentage + '%';
+        });
+
+        // Vocabulary Flip Card Logic
+        function flipCard(card) {
+            card.classList.toggle('flipped');
+            updateProgress(15);
+        }
+
+        // Modal Functions
+        function showDeadline() {
+            document.getElementById('deadlineModal').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function saveProgress() {
+            const checkedItems = document.querySelectorAll('.homework-item input[type="checkbox"]:checked').length;
+            const totalItems = document.querySelectorAll('.homework-item input[type="checkbox"]').length;
+            const percentage = (checkedItems / totalItems) * 100;
+
+            localStorage.setItem('day1Progress', JSON.stringify({
+                completedAt: new Date().toISOString(),
+                homeworkProgress: percentage,
+                checkedItems: checkedItems
+            }));
+
+            alert(`Progress saved! You have completed ${checkedItems} out of ${totalItems} homework tasks.`);
+            updateProgress(50);
+        }
+
+        function submitHomework() {
+            const checkedItems = document.querySelectorAll('.homework-item input[type="checkbox"]:checked').length;
+            const totalItems = document.querySelectorAll('.homework-item input[type="checkbox"]').length;
+
+            if (checkedItems < totalItems) {
+                alert(`Please complete all homework tasks before submitting. You have completed ${checkedItems} out of ${totalItems} tasks.`);
+                return;
+            }
+
+            document.getElementById('submissionMessage').innerHTML = `
+                <p><strong>Submission Successful! ✅</strong></p>
+                <p>Your Day 1 homework has been submitted.</p>
+                <p><strong>Submitted at:</strong> ${new Date().toLocaleString()}</p>
+                <p><strong>Tasks completed:</strong> ${totalItems}/${totalItems}</p>
+                <p>Great work! Check back tomorrow for Day 2 lesson materials.</p>
+            `;
+            document.getElementById('submissionModal').style.display = 'block';
+            updateProgress(100);
+        }
+
+        // Progress Bar Update
+        function updateProgress(percentage) {
+            const progressBar = document.getElementById('progressBar');
+            const currentProgress = parseFloat(progressBar.style.width);
+            const newProgress = Math.max(currentProgress, percentage);
+            progressBar.style.width = newProgress + '%';
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const deadlineModal = document.getElementById('deadlineModal');
+            const submissionModal = document.getElementById('submissionModal');
+
+            if (event.target === deadlineModal) {
+                deadlineModal.style.display = 'none';
+            }
+            if (event.target === submissionModal) {
+                submissionModal.style.display = 'none';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            const savedProgress = localStorage.getItem('day1Progress');
+            if (savedProgress) {
+                const data = JSON.parse(savedProgress);
+                console.log('Previous progress loaded:', data);
+            }
+        });
+    </script>
+</body>
+</html>
