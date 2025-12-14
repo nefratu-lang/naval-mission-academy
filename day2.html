@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naval Mission Academy - Day 2: Advanced Language Structures</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #2a5298;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2a5298;
+        }
+        
+        h3 {
+            color: #1e3c72;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .lesson-content {
+            margin-bottom: 20px;
+        }
+        
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .verb-table th {
+            background-color: #2a5298;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .verb-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .verb-table tr:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .hierarchy-tree {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #2a5298;
+        }
+        
+        .rank-level {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .rank-title {
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+        
+        .rank-description {
+            font-size: 0.95em;
+            color: #666;
+        }
+        
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .vocab-card {
+            background-color: #f0f7ff;
+            border: 2px solid #2a5298;
+            padding: 15px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        
+        .vocab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .vocab-term {
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        
+        .vocab-definition {
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .homework-section {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .homework-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .homework-item {
+            margin: 10px 0;
+            padding-left: 20px;
+            color: #666;
+        }
+        
+        .homework-item:before {
+            content: "✓ ";
+            color: #ffc107;
+            font-weight: bold;
+            margin-left: -20px;
+            margin-right: 10px;
+        }
+        
+        .example-box {
+            background-color: #e8f4f8;
+            border: 1px solid #b3e5fc;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .highlight {
+            background-color: #fff9c4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 10px;
+        }
+        
+        .nav-button {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            background-color: #2a5298;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: #1e3c72;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚢 Naval Mission Academy</h1>
+            <p class="subtitle">Day 2: Advanced Language Structures & Rank Systems</p>
+            <p style="color: #999; font-size: 0.9em; margin-top: 10px;">Last Updated: 2025-12-14</p>
+        </header>
+
+        <!-- Irregular Verbs Section -->
+        <div class="content-section">
+            <h2>📚 Part 1: Irregular Verbs in Naval Command</h2>
+            <div class="lesson-content">
+                <p>Irregular verbs are essential in nautical language, especially when issuing commands and describing critical actions at sea. Unlike regular verbs that follow predictable conjugation patterns, irregular verbs require memorization.</p>
+                
+                <h3>Common Irregular Verbs in Naval Operations</h3>
+                <table class="verb-table">
+                    <thead>
+                        <tr>
+                            <th>Infinitive Form</th>
+                            <th>Past Tense</th>
+                            <th>Past Participle</th>
+                            <th>Naval Meaning</th>
+                            <th>Usage Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>To Go</strong></td>
+                            <td>Went</td>
+                            <td>Gone</td>
+                            <td>Change position/Course</td>
+                            <td>"The vessel went starboard."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>To See</strong></td>
+                            <td>Saw</td>
+                            <td>Seen</td>
+                            <td>Spot/Observe</td>
+                            <td>"I saw a ship on the horizon."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>To Take</strong></td>
+                            <td>Took</td>
+                            <td>Taken</td>
+                            <td>Assume command/Capture</td>
+                            <td>"The captain took command of the fleet."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>To Come</strong></td>
+                            <td>Came</td>
+                            <td>Come</td>
+                            <td>Approach/Arrive</td>
+                            <td>"The storm came from the west."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>To Know</strong></td>
+                            <td>Knew</td>
+                            <td>Known</td>
+                            <td>Understand/Be aware</td>
+                            <td>"We knew the coordinates well."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>To Do</strong></td>
+                            <td>Did</td>
+                            <td>Done</td>
+                            <td>Execute/Perform</td>
+                            <td>"The crew did their duty."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>To Have</strong></td>
+                            <td>Had</td>
+                            <td>Had</td>
+                            <td>Possess/Hold</td>
+                            <td>"The ship had full sails."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>To Be</strong></td>
+                            <td>Was/Were</td>
+                            <td>Been</td>
+                            <td>Exist/Status</td>
+                            <td>"The waters were calm."</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Conjugation Patterns</h3>
+                <p>Study how irregular verbs conjugate in different tenses:</p>
+                <div class="example-box">
+                    <strong>Example: "To Take" (Asumir el mando)</strong><br><br>
+                    Present: I take, you take, he/she takes, we take, they take<br>
+                    Past: I took, you took, he/she took, we took, they took<br>
+                    Future: I will take, you will take, he/she will take, etc.
+                </div>
+            </div>
+        </div>
+
+        <!-- Rank Progression Tree Section -->
+        <div class="content-section">
+            <h2>⚓ Part 2: Naval Rank Progression Tree</h2>
+            <div class="lesson-content">
+                <p>Understanding the hierarchical structure of naval ranks is crucial for proper communication and respect protocols. The following represents a typical military naval hierarchy:</p>
+                
+                <h3>Enlisted Personnel Ranks</h3>
+                <div class="hierarchy-tree">
+                    <div class="rank-level">
+                        <div class="rank-title">E-1: Seaman Recruit (SR)</div>
+                        <div class="rank-description">Entry-level position; foundational training in naval procedures and maritime safety.</div>
+                    </div>
+                    
+                    <div class="rank-level">
+                        <div class="rank-title">E-2: Seaman Apprentice (SA)</div>
+                        <div class="rank-description">Advanced from E-1; demonstrates basic competency in assigned duties and responsibilities.</div>
+                    </div>
+                    
+                    <div class="rank-level">
+                        <div class="rank-title">E-3: Seaman (SN)</div>
+                        <div class="rank-description">Fully qualified sailor with demonstrated proficiency; eligible for petty officer training.</div>
+                    </div>
+                    
+                    <div class="rank-level">
+                        <div class="rank-title">E-4 to E-6: Petty Officers (PO1, PO2, PO3)</div>
+                        <div class="rank-description">Non-commissioned officers; supervisory responsibilities and technical expertise in specialized fields.</div>
+                    </div>
+                    
+                    <div class="rank-level">
+                        <div class="rank-title">E-7 to E-9: Senior Petty Officers (CPO, SCPO, MCPO)</div>
+                        <div class="rank-description">Senior leadership; mentoring junior officers; strategic naval operations planning.</div>
+                    </div>
+                </div>
+
+                <h3>Officer Ranks</h3>
+                <div class="hierarchy-tree">
+                    <div class="rank-level">
+                        <div class="rank-title">O-1: Ensign</div>
+                        <div class="rank-description">Junior commissioned officer; recent academy graduate or warrant officer promotion.</div>
+                    </div>
+                    
+                    <div class="rank-level">
+                        <div class="rank-title">O-2 to O-3: Lieutenant (Junior Grade) & Lieutenant</div>
+                        <div class="rank-description">Mid-level officers; command of smaller vessels or departments within larger ships.</div>
+                    </div>
+                    
+                    <div class="rank-level">
+                        <div class="rank-title">O-4 to O-6: Commander, Captain, & Commodore</div>
+                        <div class="rank-description">Senior officers; typically command of major vessels or naval installations.</div>
+                    </div>
+                    
+                    <div class="rank-level">
+                        <div class="rank-title">O-7 and Above: Admirals</div>
+                        <div class="rank-description">Flag officers; fleet-level command and strategic decision-making.</div>
+                    </div>
+                </div>
+
+                <h3>Key Rank Terminology</h3>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><span class="highlight">Promotion</span>: Advancement to a higher rank based on performance and service time</li>
+                    <li><span class="highlight">Demotion</span>: Reduction in rank due to disciplinary action or performance issues</li>
+                    <li><span class="highlight">Authority</span>: Power granted by rank to make decisions and command subordinates</li>
+                    <li><span class="highlight">Chain of Command</span>: The hierarchical order through which commands are issued</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Life Events Vocabulary Section -->
+        <div class="content-section">
+            <h2>🌊 Part 3: Life Events & Nautical Vocabulary</h2>
+            <div class="lesson-content">
+                <p>Critical vocabulary for discussing significant events, milestones, and situations in naval life and maritime operations:</p>
+                
+                <h3>Major Life Events at Sea</h3>
+                <div class="vocabulary-grid">
+                    <div class="vocab-card">
+                        <div class="vocab-term">Commissioning</div>
+                        <div class="vocab-definition">Official launch and activation of a naval vessel into active service. Marks the beginning of a ship's operational status.</div>
+                    </div>
+                    
+                    <div class="vocab-card">
+                        <div class="vocab-term">Deployment</div>
+                        <div class="vocab-definition">Assignment of naval forces to a specific region or mission; typically lasting several months to over a year.</div>
+                    </div>
+                    
+                    <div class="vocab-card">
+                        <div class="vocab-term">Homecoming</div>
+                        <div class="vocab-definition">Return of a naval vessel to its home port after extended deployment; celebrated by crew families.</div>
+                    </div>
+                    
+                    <div class="vocab-card">
+                        <div class="vocab-term">Mutiny</div>
+                        <div class="vocab-definition">Rebellious action against naval authority; refusal to obey orders from superior officers.</div>
+                    </div>
+                    
+                    <div class="vocab-card">
+                        <div class="vocab-term">Court-Martial</div>
+                        <div class="vocab-definition">Military tribunal for trying naval personnel accused of serious violations of naval regulations.</div>
+                    </div>
+                    
+                    <div class="vocab-card">
+                        <div class="vocab-term">Shipwreck</div>
+                        <div class="vocab-definition">Destruction or sinking of a vessel; often results in emergency rescue operations and salvage efforts.</div>
+                    </div>
+                    
+                    <div class="vocab-card">
+                        <div class="vocab-term">Collision</div>
+                        <div class="vocab-definition">Accidental impact between vessels or between a vessel and an object; requires detailed incident investigation.</div>
+                    </div>
+                    
+                    <div class="vocab-card">
+                        <div class="vocab-term">Engagement</div>
+                        <div class="vocab-definition">Direct military confrontation or combat between naval forces; can result in significant tactical changes.</div>
+                    </div>
+                    
+                    <div class="vocab-card">
+                        <div class="vocab-term">Salvage</div>
+                        <div class="vocab-definition">Recovery of a damaged or sunk vessel; involves specialized equipment and skilled naval personnel.</div>
+                    </div>
+                    
+                    <div class="vocab-card">
+                        <div class="vocab-term">Quarantine</div>
+                        <div class="vocab-definition">Isolation of a vessel or crew due to infectious disease; prevents contamination of other ships.</div>
+                    </div>
+                    
+                    <div class="vocab-card">
+                        <div class="vocab-term">Reassignment</div>
+                        <div class="vocab-definition">Transfer of personnel to a different vessel, command, or duty station within the naval service.</div>
+                    </div>
+                    
+                    <div class="vocab-card">
+                        <div class="vocab-term">Retirement</div>
+                        <div class="vocab-definition">Formal end of naval service; honorable discharge after meeting service requirements and receiving veterans benefits.</div>
+                    </div>
+                </div>
+
+                <h3>Emergency & Crisis Terminology</h3>
+                <div class="example-box">
+                    <strong>Man Overboard (MOB)</strong>: Crew member has fallen into the water; immediate rescue procedures initiated.<br><br>
+                    <strong>Abandon Ship</strong>: Order to evacuate vessel; only given in life-threatening situations.<br><br>
+                    <strong>General Quarters (GQ)</strong>: All crew to combat stations; vessel ready for engagement.<br><br>
+                    <strong>All Hands on Deck</strong>: Summons entire crew for critical situation or important announcement.<br><br>
+                    <strong>Mayday Call</strong>: International distress signal indicating immediate life-threatening emergency.
+                </div>
+            </div>
+        </div>
+
+        <!-- Homework Assignment Section -->
+        <div class="content-section">
+            <h2>📝 Part 4: Day 2 Homework Assignment</h2>
+            
+            <div class="homework-section">
+                <div class="homework-title">Assignment Overview</div>
+                <p>Complete the following exercises to reinforce your understanding of irregular verbs, rank structures, and nautical vocabulary. Submit your work within 24 hours.</p>
+            </div>
+
+            <h3>Exercise 1: Irregular Verb Conjugation (10 points)</h3>
+            <div class="example-box">
+                Conjugate the following irregular verbs in past and future tenses:<br><br>
+                1. To Go: Past _____, Future _____<br>
+                2. To See: Past _____, Future _____<br>
+                3. To Take: Past _____, Future _____<br>
+                4. To Know: Past _____, Future _____<br>
+                5. To Do: Past _____, Future _____<br><br>
+                <strong>Submission Format:</strong> Create a document with clear answers and example sentences using each verb.
+            </div>
+
+            <h3>Exercise 2: Rank Hierarchy Mapping (15 points)</h3>
+            <div class="example-box">
+                Create a visual representation or detailed written outline of the naval rank progression tree:<br><br>
+                • Include at least 5 enlisted ranks with their abbreviations<br>
+                • Include at least 5 officer ranks with their abbreviations<br>
+                • Show the progression pathway from Seaman Recruit to Admiral<br>
+                • Add brief descriptions of key responsibilities at each level<br><br>
+                <strong>Submission Format:</strong> Diagram, flowchart, or comprehensive written document.
+            </div>
+
+            <h3>Exercise 3: Vocabulary Application (15 points)</h3>
+            <div class="example-box">
+                Using the life events vocabulary from Part 3, complete the following:<br><br>
+                1. Write 5 sentences describing different life events that might occur during naval service<br>
+                2. Create emergency scenarios using the crisis terminology provided<br>
+                3. Match 10 vocabulary terms with their correct definitions<br>
+                4. Use at least 3 different terms in a short narrative (100-150 words) about a naval mission<br><br>
+                <strong>Submission Format:</strong> Typed document or handwritten (clearly legible) response.
+            </div>
+
+            <h3>Exercise 4: Practical Communication (10 points)</h3>
+            <div class="example-box">
+                Compose 5 short naval communications using irregular verbs and proper rank terminology:<br><br>
+                Example: "Commander, the crew has taken their positions. All hands are ready for departure."<br><br>
+                Requirements:<br>
+                • Use at least one irregular verb in each sentence<br>
+                • Include proper naval rank terminology<br>
+                • Maintain formal military communication style<br>
+                • Ensure grammatical accuracy
+            </div>
+
+            <h3>Exercise 5: Personal Reflection (10 points)</h3>
+            <div class="example-box">
+                Write a short reflection (150-200 words) addressing:<br><br>
+                • Why is understanding rank hierarchy important in naval operations?<br>
+                • How do irregular verbs affect communication in emergencies?<br>
+                • What vocabulary from today's lesson do you find most challenging?<br>
+                • How will you apply this knowledge in your naval career?
+            </div>
+
+            <div class="homework-section" style="margin-top: 30px;">
+                <div class="homework-title">Submission Guidelines</div>
+                <div class="homework-item">All homework must be submitted by 2025-12-15 23:59:00 UTC</div>
+                <div class="homework-item">Use clear, legible formatting (digital or handwritten)</div>
+                <div class="homework-item">Include your name, date, and "Day 2 Homework" on all submissions</div>
+                <div class="homework-item">Combine all exercises into a single document when possible</div>
+                <div class="homework-item">Proofread for spelling and grammar before submission</div>
+                <div class="homework-item">Points awarded based on completion, accuracy, and effort</div>
+                <div class="homework-item">Total homework value: 60 points (contributes to overall course grade)</div>
+            </div>
+        </div>
+
+        <!-- Key Takeaways -->
+        <div class="content-section">
+            <h2>🎯 Key Takeaways from Day 2</h2>
+            <ul style="margin-left: 20px;">
+                <li><strong>Irregular Verbs:</strong> Master the 8 essential irregular verbs for naval communication; memorization is critical for fluent command interactions.</li>
+                <li><strong>Rank Structure:</strong> Understanding the chain of command (E-1 through O-9) ensures proper respect protocols and effective organizational communication.</li>
+                <li><strong>Vocabulary Mastery:</strong> Life events and emergency terminology are essential for responding appropriately in critical situations.</li>
+                <li><strong>Communication Precision:</strong> Naval operations demand grammatically correct and professionally formal communication at all times.</li>
+                <li><strong>Continuous Learning:</strong> These foundational elements build toward advanced maritime law and strategic command language in future lessons.</li>
+            </ul>
+        </div>
+
+        <!-- Additional Resources -->
+        <div class="content-section">
+            <h2>📖 Additional Resources & References</h2>
+            <div class="lesson-content">
+                <h3>Study Materials</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Naval Operations Manual - Chapters 2-3 (Rank Structure and Communication Protocol)</li>
+                    <li>English Irregular Verbs Reference Guide - Available in course materials</li>
+                    <li>Maritime Terminology Dictionary - Digital and print versions available</li>
+                    <li>Video Tutorials: "Irregular Verbs in Action" (20 minutes)</li>
+                </ul>
+
+                <h3>Practice Opportunities</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Interactive verb conjugation exercises on the Academy Learning Platform</li>
+                    <li>Peer study groups meet daily at 18:00 UTC in Room 4</li>
+                    <li>Office hours with instructors: Tuesday and Thursday, 14:00-16:00 UTC</li>
+                    <li>Simulation drills using proper terminology (scheduled for Day 3)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <a href="day1.html" class="nav-button">← Day 1: Fundamentals</a>
+            <a href="index.html" class="nav-button">Academy Home</a>
+            <a href="day3.html" class="nav-button">Day 3: Advanced Tactics →</a>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Naval Mission Academy. All rights reserved. | Last Updated: 2025-12-14 22:28:36 UTC</p>
+            <p>Course maintained by: nefratu-lang | Repository: naval-mission-academy</p>
+        </footer>
+    </div>
+</body>
+</html>
